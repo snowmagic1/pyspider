@@ -177,6 +177,7 @@ class Fetcher(object):
         result['save'] = task.get('fetch', {}).get('save')
         if len(result['content']) < 70:
             logger.info("[200] %s:%s %s 0s", task.get('project'), task.get('taskid'), url)
+            logger.info("[%s]", result['content'])
         else:
             logger.info(
                 "[200] %s:%s data:,%s...[content:%d] 0s",

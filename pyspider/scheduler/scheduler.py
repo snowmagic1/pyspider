@@ -383,6 +383,7 @@ class Scheduler(object):
         while len(tasks) < self.LOOP_LIMIT:
             try:
                 task = self.newtask_queue.get_nowait()
+                logger.debug('newtask_queue [%r]', task)
             except Queue.Empty:
                 break
 
@@ -810,6 +811,7 @@ class Scheduler(object):
         if _schedule.get('itag') and _schedule['itag'] != old_schedule.get('itag'):
             restart = True
         elif schedule_age >= 0 and schedule_age + (old_task.get('lastcrawltime', 0) or 0) < now:
+            logger.debug("age is not old enough for restart")
             restart = True
         elif _schedule.get('force_update'):
             restart = True

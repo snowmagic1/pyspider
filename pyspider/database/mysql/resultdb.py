@@ -39,6 +39,9 @@ class ResultDB(MySQLMixin, SplitTableMixin, BaseResultDB, BaseDB):
             `taskid` varchar(64) PRIMARY KEY,
             `url` varchar(1024),
             `result` MEDIUMBLOB,
+            `title` varchar(100),
+            `rating` int,
+            `director` varchar(100),
             `updatetime` double(16, 4)
             ) ENGINE=InnoDB CHARSET=utf8''' % self.escape(tablename))
 
@@ -60,10 +63,15 @@ class ResultDB(MySQLMixin, SplitTableMixin, BaseResultDB, BaseDB):
         if project not in self.projects:
             self._create_project(project)
             self._list_project()
+        rating = float(result['rating']) if result['rating'] else 0
+
         obj = {
             'taskid': taskid,
             'url': url,
             'result': result,
+            'title': result['title'],
+            'rating': int(rating*10),
+            'director': ','.join(result['director']),
             'updatetime': time.time(),
         }
         return self._replace(tablename, **self._stringify(obj))
