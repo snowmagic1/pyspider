@@ -1,10 +1,5 @@
-FROM cmfatih/phantomjs
-MAINTAINER binux <roy@binux.me>
-
-# install python
-RUN apt-get update && \
-        apt-get install -y python python-dev python-distribute python-pip && \
-        apt-get install -y libcurl4-openssl-dev libxml2-dev libxslt1-dev python-lxml python-mysqldb libpq-dev
+FROM python:3.4
+MAINTAINER leishi <lei.shi.10151@gmail.com>
 
 # install requirements
 RUN pip install -U pip setuptools
@@ -20,6 +15,6 @@ WORKDIR /opt/pyspider
 RUN pip install -e .[all]
 
 VOLUME ["/opt/pyspider"]
-ENTRYPOINT ["pyspider"]
+ENTRYPOINT python run.py --debug -c ./pyspider/config.json
 
 EXPOSE 5000 23333 24444 25555

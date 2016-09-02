@@ -1,6 +1,6 @@
 {
-  "taskdb": "mysql+taskdb://root:qwe123@172.18.0.2/taskdb",
-  "projectdb": "mysql+projectdb://root:qwe123@172.18.0.2/projectdb",
-  "resultdb": "mysql+resultdb://root:qwe123@172.18.0.2/resultdb",
-  "message_queue": "amqp://guest:guest@172.18.0.3/%2F"
+  "taskdb": "mysql+taskdb://root:qwe123@mysql/taskdb",
+  "projectdb": "mysql+projectdb://root:qwe123@mysql/projectdb",
+  "resultdb": "mysql+resultdb://root:qwe123@mysql/resultdb",
+  "message_queue": "amqp://guest:guest@rabbitmq/%2F"
 }
