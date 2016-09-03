@@ -156,7 +156,6 @@ class BaseHandler(object):
         """
         process = task.get('process', {})
         callback = process.get('callback', '__call__')
-        self.logger.error("  callback [%s]", callback)
 
         if not hasattr(self, callback):
             raise NotImplementedError("self.%s() not implemented!" % callback)
@@ -254,7 +253,6 @@ class BaseHandler(object):
         task = {}
 
         assert len(url) < 1024, "Maximum (1024) URL length error."
-        self.logger.debug("  crawling [%s]", url)
 
         if kwargs.get('callback'):
             callback = kwargs['callback']
