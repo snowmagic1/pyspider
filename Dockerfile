@@ -10,9 +10,8 @@ RUN pip install -r /opt/pyspider/requirements.txt
 # add all repo
 ADD ./ /opt/pyspider
 
-# run test
 WORKDIR /opt/pyspider
-RUN pip install -e .[all]
+# RUN pip install -e .[all]
 
 VOLUME ["/opt/pyspider"]
 ENTRYPOINT ["python", "run.py", "-c", "./pyspider/config.json"]

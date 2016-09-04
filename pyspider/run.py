@@ -56,6 +56,8 @@ def connect_rpc(ctx, param, value):
         from six.moves import xmlrpc_client
     except ImportError:
         import xmlrpclib as xmlrpc_client
+
+    logging.getLogger('webui').debug("connecting to rpc [%s]", value)
     return xmlrpc_client.ServerProxy(value, allow_none=True)
 
 
