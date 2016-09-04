@@ -94,6 +94,13 @@ def cli(ctx, **kwargs):
     if kwargs['add_sys_path']:
         sys.path.append(os.getcwd())
 
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger('scheduler').setLevel(logging.DEBUG)
+    logging.getLogger('fetcher').setLevel(logging.DEBUG)
+    logging.getLogger('processor').setLevel(logging.DEBUG)
+    logging.getLogger('result').setLevel(logging.DEBUG)
+    logging.getLogger('webui').setLevel(logging.DEBUG)
+
     logging.config.fileConfig(kwargs['logging_config'])
 
     # get db from env

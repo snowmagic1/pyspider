@@ -15,6 +15,7 @@ WORKDIR /opt/pyspider
 RUN pip install -e .[all]
 
 VOLUME ["/opt/pyspider"]
-ENTRYPOINT python run.py --debug -c ./pyspider/config.json
-
+ENTRYPOINT ["python", "run.py", "-c", "./pyspider/config.json"]
 EXPOSE 5000 23333 24444 25555
+
+CMD ["all"]

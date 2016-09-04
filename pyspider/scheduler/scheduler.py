@@ -21,7 +21,7 @@ from pyspider.libs.base_handler import BaseHandler
 from .task_queue import TaskQueue
 
 logger = logging.getLogger('scheduler')
-
+logger.setLevel(logging.DEBUG)
 
 class Project(object):
     '''
@@ -383,7 +383,6 @@ class Scheduler(object):
         while len(tasks) < self.LOOP_LIMIT:
             try:
                 task = self.newtask_queue.get_nowait()
-                logger.debug('newtask_queue [%r]', task)
             except Queue.Empty:
                 break
 
@@ -675,6 +674,7 @@ class Scheduler(object):
         application.register_function(dump_counter, 'counter')
 
         def new_task(task):
+            logger.debug('----- rpc call:new_task:[%r]', task['url'])
             if self.task_verify(task):
                 self.newtask_queue.put(task)
                 return True
@@ -683,11 +683,13 @@ class Scheduler(object):
 
         def send_task(task):
             '''dispatch task to fetcher'''
+            logger.debug('----- rpc call:send_task:[%r]', task['url'])
             self.send_task(task)
             return True
         application.register_function(send_task, 'send_task')
 
         def update_project():
+            logger.debug('----- rpc call:update_project')
             self._force_update_project = True
         application.register_function(update_project, 'update_project')
 
@@ -811,7 +813,6 @@ class Scheduler(object):
         if _schedule.get('itag') and _schedule['itag'] != old_schedule.get('itag'):
             restart = True
         elif schedule_age >= 0 and schedule_age + (old_task.get('lastcrawltime', 0) or 0) < now:
-            logger.debug("age is not old enough for restart")
             restart = True
         elif _schedule.get('force_update'):
             restart = True
