@@ -14,6 +14,7 @@ import time
 import shutil
 import logging
 import logging.config
+from pyspider.logstash import LogstashHandler
 
 import click
 import pyspider
@@ -21,6 +22,10 @@ from pyspider.message_queue import connect_message_queue
 from pyspider.database import connect_database
 from pyspider.libs import utils
 
+test_logger = logging.getLogger('python-logstash-logger')
+test_logger.setLevel(logging.INFO)
+test_logger.addHandler(LogstashHandler('logstash', 5959, version=1))
+test_logger.error('python-logstash: test logstash error message. 1')  
 
 def read_config(ctx, param, value):
     if not value:
