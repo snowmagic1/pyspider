@@ -120,12 +120,11 @@ class LogstashFormatterVersion1(LogstashFormatterBase):
         # Create message dict
         message = {
             '@timestamp': self.format_timestamp(record.created),
-            '@version': '1',
             'message': record.getMessage(),
             'host': self.host,
-            'path': record.pathname,
+            'filename': record.filename,
+            'funcname':record.funcName,
             'lineno': record.lineno,
-            'tags': self.tags,
             'type': self.message_type,
 
             # Extra Fields

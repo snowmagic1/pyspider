@@ -96,14 +96,10 @@ def cli(ctx, **kwargs):
     if kwargs['add_sys_path']:
         sys.path.append(os.getcwd())
 
-    logging.getLogger().addHandler(LogstashHandler('logstash', 5959, version=1))
-
-    loggerNames = ["scheduler", "fetcher", "processor", "result", "webui"]
-    for loggerName in loggerNames:
-        logging.getLogger(loggerName).setLevel(logging.DEBUG)
-
     # logging.config.fileConfig(kwargs['logging_config'])
-
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().addHandler(LogstashHandler('logstash', 5959, version=1))
+    
     # get db from env
     for db in ('taskdb', 'projectdb', 'resultdb'):
         if kwargs[db] is not None:
