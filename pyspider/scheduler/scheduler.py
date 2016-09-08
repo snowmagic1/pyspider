@@ -21,7 +21,6 @@ from pyspider.libs.base_handler import BaseHandler
 from .task_queue import TaskQueue
 
 logger = logging.getLogger('scheduler')
-logger.setLevel(logging.DEBUG)
 
 class Project(object):
     '''

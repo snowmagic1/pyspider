@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Console App",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config.python.pythonPath}",
+            "program": "${workspaceRoot}/run.py",
+            "args":["--debug scheduler"],
+            "externalConsole": true,
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit"
+            ]
+        }
+    ]
+}
